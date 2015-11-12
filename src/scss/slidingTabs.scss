@@ -5,8 +5,9 @@ $activeTabColor: $bar-positive-bg !default;
 $normalTabColor: $bar-positive-bg !default;
 $activeTabTextColor: #fff !default;
 $normalTabTextColor: rgba(255,255,255,.6) !default;
-
-
+$tabTextSize: 11px !default;
+$tabTextTransform: uppercase !default;
+$tabTextFontWeight: 300 !default;
 
 ion-slide {
   background-color: #f0f0f0;
@@ -46,8 +47,9 @@ ion-slide {
       float: left;
       margin: 0;
       padding: 0 12px 20px 12px;
-      font-size: 11px;
-      text-transform: uppercase;
+      font-size: $tabTextSize;
+      font-weight: $tabTextFontWeight;
+      text-transform: $tabTextTransform;
       color: $normalTabTextColor;
       @include transition(color .25s ease-in-out);
       position: relative;
