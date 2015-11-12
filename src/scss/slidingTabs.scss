@@ -1,5 +1,12 @@
-
 $slidingTabsHeight: 48px !default;
+$tabIndicatorWrapperColor: rgba(255,255,255,.2) !default;
+$tabIndicatorColor: #fff !default;
+$activeTabColor: $bar-positive-bg !default;
+$normalTabColor: $bar-positive-bg !default;
+$activeTabTextColor: #fff !default;
+$normalTabTextColor: rgba(255,255,255,.6) !default;
+
+
 
 ion-slide {
   background-color: #f0f0f0;
@@ -29,7 +36,7 @@ ion-slide {
   z-index: 10;
 
   ul {
-    background-color: $bar-positive-bg;
+    background-color: $normalTabColor;
     height: $slidingTabsHeight;
 
     li {
@@ -41,13 +48,14 @@ ion-slide {
       padding: 0 12px 20px 12px;
       font-size: 11px;
       text-transform: uppercase;
-      color: rgba(255,255,255,.6);
+      color: $normalTabTextColor;
       @include transition(color .25s ease-in-out);
       position: relative;
       overflow: hidden;
 
       &.tab-active {
-        color: #fff;
+        color: $activeTabTextColor;
+        background-color: $activeTabColor;
       }
 
       .ink {
@@ -66,15 +74,15 @@ ion-slide {
 
   .tab-indicator-wrapper {
     width: 100%;
-    height: 2px;
-    background-color: rgba(255,255,255,.2);
-    -webkit-transform: translateY(-2px);
+    height: 4px;
+    background-color: $tabIndicatorWrapperColor;
+    -webkit-transform: translateY(-4px);
     position: absolute;
 
     .tab-indicator {
       height: 100%;
 
-      background-color: #fff;
+      background-color: $tabIndicatorColor;
       width: 70px;
       position: relative;
     }
