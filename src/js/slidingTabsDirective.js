@@ -15,7 +15,8 @@ var slidingTabsDirective = angular.module("ionic").directive('ionSlideTabs', ['$
             var tabsBar;
 
             var options = {
-                "slideTabsScrollable": true
+                "slideTabsScrollable": true,
+                "slideTabsTouchAnimation": true
             }
 
 
@@ -23,6 +24,10 @@ var slidingTabsDirective = angular.module("ionic").directive('ionSlideTabs', ['$
 
                 if(angular.isDefined( attrs.slideTabsScrollable ) && attrs.slideTabsScrollable === "false" ) {
                     options.slideTabsScrollable = false;
+                }
+
+                if(angular.isDefined( attrs.slideTabsTouchAnimation ) && attrs.slideTabsTouchAnimation === "false" ) {
+                    options.slideTabsTouchAnimation = false;
                 }
 
                 var tabItems = '<li ng-repeat="(key, value) in tabs" ng-click="onTabTabbed($event, {{key}})" class="slider-slide-tab" ng-bind-html="value"></li>';
@@ -223,7 +228,9 @@ var slidingTabsDirective = angular.module("ionic").directive('ionSlideTabs', ['$
             }
 
             scope.onTabTabbed = function(event, index) {
-                addTabTouchAnimation(event, angular.element(event.currentTarget) );
+                if (options.slideTabsTouchAnimation) {
+                    addTabTouchAnimation(event, angular.element(event.currentTarget) );
+                }                
                 ionicSlideBoxDelegate.slide(index);
                 slideToCurrentPosition();
             }
