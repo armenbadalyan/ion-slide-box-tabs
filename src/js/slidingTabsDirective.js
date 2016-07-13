@@ -73,6 +73,12 @@ var slidingTabsDirective = angular.module("ionic").directive('ionSlideTabs', ['$
 
                 }
 
+                scope.$watchCollection('tabs', function () {
+                    slideTabs = angular.element(tabsBar[0].querySelector("ul").querySelectorAll(".slider-slide-tab"));
+                    slideToCurrentPosition();
+                    setTabBarWidth();
+                });
+
 
                 addEvents();
                 setTabBarWidth();
@@ -175,7 +181,6 @@ var slidingTabsDirective = angular.module("ionic").directive('ionSlideTabs', ['$
 
             }
 
-
             var setIndicatorPosition = function (currentSlideIndex, targetSlideIndex, position, slideDirection) {
 
                 var targetTab = angular.element(slideTabs[targetSlideIndex]);
@@ -238,16 +243,7 @@ var slidingTabsDirective = angular.module("ionic").directive('ionSlideTabs', ['$
             scope.tabs = [];
 
             scope.addTabContent = function ($content) {
-
                 scope.tabs.push($content);
-                scope.$apply();
-
-                $timeout(function() {
-                    slideTabs = angular.element(tabsBar[0].querySelector("ul").querySelectorAll(".slider-slide-tab"));
-                    slideToCurrentPosition();
-                    setTabBarWidth()
-                })
-
             }
 
             scope.onSlideChange = function (slideIndex) {
@@ -279,13 +275,11 @@ var slidingTabsDirective = angular.module("ionic").directive('ionSlideTabs', ['$
 
             init();
         },
-        controller: ['$scope',function($scope) {
+        controller: ['$scope',function($scope) {            
             this.addTab = function($content) {
-                $timeout(function() {
-                    if($scope.addTabContent) {
-                        $scope.addTabContent($content);
-                    }
-                });
+                if($scope.addTabContent) {
+                    $scope.addTabContent($content);                    
+                }
             }
         }]
     };
